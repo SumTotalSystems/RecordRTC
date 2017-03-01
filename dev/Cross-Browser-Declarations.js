@@ -15,6 +15,12 @@ if (typeof requestAnimationFrame === 'undefined') {
         /*global requestAnimationFrame:true */
         requestAnimationFrame = mozRequestAnimationFrame;
     }
+
+    if (typeof window.requestAnimationFrame === 'undefined') {
+        window.requestAnimationFrame = window.requestAnimationFrame || function(callback) {
+            window.setTimeout(callback, 0);
+        };
+    }
 }
 
 /*jshint -W079 */
@@ -28,6 +34,11 @@ if (typeof cancelAnimationFrame === 'undefined') {
     if (typeof mozCancelAnimationFrame !== 'undefined') {
         /*global cancelAnimationFrame:true */
         cancelAnimationFrame = mozCancelAnimationFrame;
+    }
+    if (typeof window.cancelAnimationFrame === 'undefined') {
+        window.cancelAnimationFrame = window.requestAnimationFrame || function(callback) {
+            window.setTimeout(callback, 0);
+        };
     }
 }
 
